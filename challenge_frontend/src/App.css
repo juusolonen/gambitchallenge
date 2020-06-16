@@ -1,38 +1,6 @@
 .App {
   text-align: center;
-  box-sizing: border-box;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.table {
-  background-color: #2f3541;
-  min-height: 10vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-table, th, td {
-  border-collapse: collapse;
-  border: 1px solid white;
-}
-td, th {
-  padding: 1rem;
-}
-tr:nth-child(even) {
-  background-color: #55727a;
-}
-tr:hover {
-  background-color: #109bc2;
-}
-
-
+  }
 
 .App-header {
   background-color: #282c34;
@@ -48,3 +16,40 @@ tr:hover {
 .App-link {
   color: #61dafb;
 }
+
+.table {
+  background-color: #282c34;
+  min-height: 10vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+table, th, td {
+  border-collapse: collapse;
+  border: 1px solid white;
+}
+td, th {
+  padding: 1rem;
+}
+
+th{
+  background-color: #373d49;
+}
+tr:nth-child(even) {
+  background-color: #55727a;
+}
+tr:hover {
+  background-color: #109bc2;
+}
+
+.chevron {
+  font-size: 5em;
+}
+
+.chevron:hover {
+  color: #55727a;
+}
+
