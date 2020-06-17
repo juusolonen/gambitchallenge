@@ -53,3 +53,10 @@ tr:hover {
   color: #55727a;
 }
 
+button {
+  background-color: #55727a;
+  cursor: pointer;
+  color: white;
+  padding: 2em;
+}
+

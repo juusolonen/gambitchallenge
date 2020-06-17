@@ -1,6 +1,4 @@
 import React from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 import Register from './Register'
 
 
@@ -19,7 +17,7 @@ const RegisterTable = ({toShow, setToShow, registers}) => {
     if(registers) {
         return (
             <div className="table">
-                <FontAwesomeIcon className="chevron" icon={faChevronLeft} id="prev" onClick={handleClick} />
+                <button id="prev" onClick={handleClick}>prev</button> 
                 <table>
                     <thead>
                         <tr>
@@ -34,7 +32,7 @@ const RegisterTable = ({toShow, setToShow, registers}) => {
                     </tbody>
     
                 </table>
-               <FontAwesomeIcon className="chevron" icon={faChevronRight} id="next" onClick={handleClick} />
+               <button id="next" onClick={handleClick}>next</button> 
             </div>
         )
     }
