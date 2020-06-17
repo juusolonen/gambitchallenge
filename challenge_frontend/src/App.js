@@ -15,8 +15,6 @@ function App() {
   const [reg4, setReg4] = useState([])
   const [reg5, setReg5] = useState([])
 
-  const some = [1,2,3,4,5]
-
   useEffect(() => {
     DataService.getData()
       .then(data => {
@@ -31,12 +29,12 @@ function App() {
 
   return (
     <div className="App">
-      <Header date={regValues.date} />
-      {toShow === 1 && <RegisterTable registers={reg1} toShow={toShow} setToShow={setToShow} /> } 
-      {toShow === 2 && <RegisterTable registers={reg2} toShow={toShow}  setToShow={setToShow} /> } 
-      {toShow === 3 && <RegisterTable registers={reg3} toShow={toShow}  setToShow={setToShow} /> } 
-      {toShow === 4 && <RegisterTable registers={reg4} toShow={toShow}  setToShow={setToShow} /> } 
-      {toShow === 5 && <RegisterTable registers={reg5} toShow={toShow}  setToShow={setToShow} /> } 
+      {regValues && <Header date={regValues.date} /> }
+      {toShow === 1 && <RegisterTable setRegValues={setRegValues} registers={reg1} toShow={toShow} setToShow={setToShow} /> } 
+      {toShow === 2 && <RegisterTable setRegValues={setRegValues} registers={reg2} toShow={toShow}  setToShow={setToShow} /> } 
+      {toShow === 3 && <RegisterTable setRegValues={setRegValues} registers={reg3} toShow={toShow}  setToShow={setToShow} /> } 
+      {toShow === 4 && <RegisterTable setRegValues={setRegValues} registers={reg4} toShow={toShow}  setToShow={setToShow} /> } 
+      {toShow === 5 && <RegisterTable setRegValues={setRegValues} registers={reg5} toShow={toShow}  setToShow={setToShow} /> } 
     </div>
   )
 }
