@@ -1,7 +1,7 @@
 /* eslint-disable linebreak-style */
 import React, { useState, useEffect } from 'react'
-import DataService from './services/DataService'
 import Header from './components/Header'
+import DataService from './services/DataService'
 import RegisterTable from './components/RegisterTable'
 import './App.css'
 
@@ -15,26 +15,37 @@ function App() {
   const [reg4, setReg4] = useState([])
   const [reg5, setReg5] = useState([])
 
+  const setAll = (data) => {
+    setRegValues(data)
+    setReg1(data.registers.splice(0,20))
+    setReg2(data.registers.splice(0,20))
+    setReg3(data.registers.splice(0,20))
+    setReg4(data.registers.splice(0,20))
+    setReg5(data.registers.splice(0,20))
+  }
+
   useEffect(() => {
+    const ws = new WebSocket('ws://localhost:8080')
+    ws.onmessage = (data) => {
+      setAll(JSON.parse(data.data))
+    }
+  }, [])
+
+ useEffect(() => {
     DataService.getData()
-      .then(data => {
-        setRegValues(data)
-        setReg1(data.registers.splice(0,20))
-        setReg2(data.registers.splice(0,20))
-        setReg3(data.registers.splice(0,20))
-        setReg4(data.registers.splice(0,20))
-        setReg5(data.registers.splice(0,20))
-      })
+    .then(data => {
+      setAll(data)
+    })
   }, [])
 
   return (
     <div className="App">
       {regValues && <Header date={regValues.date} /> }
-      {toShow === 1 && <RegisterTable setRegValues={setRegValues} registers={reg1} toShow={toShow} setToShow={setToShow} /> } 
-      {toShow === 2 && <RegisterTable setRegValues={setRegValues} registers={reg2} toShow={toShow}  setToShow={setToShow} /> } 
-      {toShow === 3 && <RegisterTable setRegValues={setRegValues} registers={reg3} toShow={toShow}  setToShow={setToShow} /> } 
-      {toShow === 4 && <RegisterTable setRegValues={setRegValues} registers={reg4} toShow={toShow}  setToShow={setToShow} /> } 
-      {toShow === 5 && <RegisterTable setRegValues={setRegValues} registers={reg5} toShow={toShow}  setToShow={setToShow} /> } 
+      {toShow === 1 && <RegisterTable registers={reg1} toShow={toShow} setToShow={setToShow} /> } 
+      {toShow === 2 && <RegisterTable registers={reg2} toShow={toShow} setToShow={setToShow} /> } 
+      {toShow === 3 && <RegisterTable registers={reg3} toShow={toShow} setToShow={setToShow} /> } 
+      {toShow === 4 && <RegisterTable registers={reg4} toShow={toShow} setToShow={setToShow} /> } 
+      {toShow === 5 && <RegisterTable registers={reg5} toShow={toShow} setToShow={setToShow} /> } 
     </div>
   )
 }

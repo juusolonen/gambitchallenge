@@ -1,28 +1,8 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Register from './Register'
 
 
-const RegisterTable = ({setRegValues, toShow, setToShow, registers}) => {
-
-    useEffect(() => {
-        let ES = new EventSource('http://localhost:3003/stream')
-        ES.onmessage = e => {
-            console.log(e)
-            helper(JSON.parse(e.data))
-        }
-    }, [])
-    
-    const helper = (data) => {
-     DataService.getData(JSON.parse(data))
-      .then(data => {
-        setRegValues(data)
-        setReg1(data.registers.splice(0,20))
-        setReg2(data.registers.splice(0,20))
-        setReg3(data.registers.splice(0,20))
-        setReg4(data.registers.splice(0,20))
-        setReg5(data.registers.splice(0,20))
-     })
-    }
+const RegisterTable = ({toShow, setToShow, registers}) => {
 
     const handleClick = (e) => {
         if (e.target.id === 'next') {

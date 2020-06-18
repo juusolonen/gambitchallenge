@@ -1,13 +1,18 @@
+const fs = require('fs')
 
-
-const parse = (items) => {
-    return items.split('\r\n')
+const getter = () => {
+    return fs.readFileSync('readings.txt', 'utf8', (err, data) => {
+        if (err) throw err
+        return data
+    })
 }
 
-const modify = (itemlist) => {
-    let data = {date: itemlist[0], registers: []}
+const parse = (items) => {
+    let splitted = items.split('\r\n')
 
-    itemlist.forEach(item => {
+    let data = {date: splitted[0], registers: []}
+
+    splitted.forEach(item => {
         let newItem = item.split(':')
         let regObject = {}
         regObject.regNum = newItem[0]
@@ -17,7 +22,8 @@ const modify = (itemlist) => {
     data.registers.shift()
   
     return data
-
 }
 
-module.exports = {parse, modify}
+
+
+module.exports = {parse, getter}

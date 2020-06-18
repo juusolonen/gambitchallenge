@@ -1,48 +1,36 @@
 const express = require('express')
 const cors = require('cors')
-const getter = require('./utils/getter')
 const parser = require('./utils/parser')
 const fs = require('fs')
+const WebSocket = require('ws')
 
 const app = express()
 app.use(express.json())
 app.use(cors())
 
-
-app.get('/', (req, res) => {
-    let received = getter.getter()
-    let parsed = parser.parse(received)
-    let final = parser.modify(parsed)
-    res.status(200).send(final)
-})
-
-app.get('/stream', (req, res) => {
-
-
-    res.set({
-        'Content-Type': 'text/event-stream',
-        'Cache-Control': 'no-cache',
-        Connection: 'keep-alive'
-    })
-    
+const wss = new WebSocket.Server({ port: 8080 })
+wss.on('connection', function connection(ws) {
     let lastDate = ''
     fs.watch('readings.txt', (e, file) => {
 
         if(file){
-            let received = getter.getter()
+            let received = parser.getter()
             let parsed = parser.parse(received)
-            let final = parser.modify(parsed)
-            if(lastDate !== final.date){
-                lastDate = final.date
-                res.write(JSON.stringify(final))
-                console.log('sent')
+            if(lastDate !== parsed.date){
+                lastDate = parsed.date
+                ws.send(JSON.stringify(parsed))
             } else {
                 console.log('ei kay')
             }
 
         }})
-    
+})
 
+
+app.get('/', (req, res) => {
+    let received = parser.getter()
+    let parsed = parser.parse(received)
+    res.status(200).send(parsed)
 })
 
 
