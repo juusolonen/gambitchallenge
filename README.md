@@ -20,3 +20,8 @@ Navigate to "challenge"-folder on commandline and run
 then go to *http://localhost/3003*
 
 
+### note
+
+You can see the table in the front-end change by changing something in 'readings.txt' and saving the file.
+
+
