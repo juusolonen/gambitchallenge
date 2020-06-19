@@ -1,7 +1,6 @@
 /* eslint-disable linebreak-style */
 import React, { useState, useEffect } from 'react'
 import Header from './components/Header'
-import DataService from './services/DataService'
 import RegisterTable from './components/RegisterTable'
 import './App.css'
 
@@ -16,6 +15,7 @@ function App() {
   const [reg5, setReg5] = useState([])
 
   const setAll = (data) => {
+    //console.log(data)
     setRegValues(data)
     setReg1(data.registers.splice(0,20))
     setReg2(data.registers.splice(0,20))
@@ -31,12 +31,6 @@ function App() {
     }
   }, [])
 
- useEffect(() => {
-    DataService.getData()
-    .then(data => {
-      setAll(data)
-    })
-  }, [])
 
   return (
     <div className="App">

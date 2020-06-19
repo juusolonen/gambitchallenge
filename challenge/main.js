@@ -5,6 +5,7 @@ const fs = require('fs')
 const WebSocket = require('ws')
 
 const app = express()
+app.use(express.static('public'))
 app.use(express.json())
 app.use(cors())
 
@@ -20,11 +21,15 @@ wss.on('connection', function connection(ws) {
                 lastDate = parsed.date
                 ws.send(JSON.stringify(parsed))
             } else {
-                console.log('ei kay')
+                console.log('not sent')
             }
-
         }})
+
+        let received = parser.getter()
+        let parsed = parser.parse(received)
+        ws.send(JSON.stringify(parsed))
 })
+
 
 
 app.get('/', (req, res) => {
