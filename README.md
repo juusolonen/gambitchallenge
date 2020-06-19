@@ -23,5 +23,6 @@ then go to *http://localhost/3003*
 ### note
 
 You can see the table in the front-end change by changing something in 'readings.txt' and saving the file.
+**important** The date must be modified or the front-end might not get the changes.
 
 
